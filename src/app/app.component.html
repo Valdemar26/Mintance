@@ -1,13 +1,12 @@
 <div class="ui-g">
     <div class="ui-g-4">
-        <p-inputSwitch [(ngModel)]="checked" class="ui-g-12 ui-sm-4"></p-inputSwitch>
+        <p-dropdown [options]="param" [(ngModel)]="chooseParam" id="param"></p-dropdown>
     </div>
     <div class="ui-g-4">
-        <p-inputSwitch onLabel="I confirm"
-                       offLabel="I reject" [(ngModel)]="val" class="ui-g-12 ui-sm-4"></p-inputSwitch>
+        <p-dropdown [options]="equals" [(ngModel)]="chooseEqual" id="equals"></p-dropdown>
     </div>
     <div class="ui-g-4">
-        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" class="ui-g-12 ui-sm-4"></p-dropdown>
+        <input type="text" pInputText placeholder="input text" (keyup)="onKey($event)">
     </div>
 </div>
 

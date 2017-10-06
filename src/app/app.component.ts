@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { SelectItem } from "primeng/components/common/selectitem";
 
 @Component({
@@ -6,23 +6,26 @@ import { SelectItem } from "primeng/components/common/selectitem";
   templateUrl: './app.component.html',
   styleUrls: ['app.component.css']
 })
-export class AppComponent implements OnInit {
-
-  cities: SelectItem[];
-  selectedCity: string;
+export class AppComponent implements OnInit, DoCheck {
+  param: SelectItem[];
+  chooseParam: string;
+  equals: SelectItem[];
+  chooseEqual: string;
+  values = '';
 
   constructor() {
-    this.cities = [];
-    this.cities.push({label:'Select City', value:null});
-    this.cities.push({label:'New York', value:{id:1, name: 'New York', code: 'NY'}});
-    this.cities.push({label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}});
-    this.cities.push({label:'London', value:{id:3, name: 'London', code: 'LDN'}});
-    this.cities.push({label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}});
-    this.cities.push({label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}});
-  }
+    this.param = [];
+    this.param.push({label:'Choose parameter', value:null});
+    this.param.push({label:'param_one', value:{id:1, name:'param_one'}});
+    this.param.push({label:'param_two', value:{id:2, name:'param_two'}});
+    this.param.push({label:'param_tree', value:{id:3, name:'param_tree'}});
+    this.param.push({label:'param_four', value:{id:4, name:'param_four'}});
 
-  checked: boolean;
-  val: boolean;
+    this.equals = [];
+    this.equals.push({label:'Choose equals', value:null});
+    this.equals.push({label:'equal', value:{id:1, name:'equal'}});
+    this.equals.push({label:'not_equal', value:{id:2, name:'not_equal'}});
+  }
 
   /* from json file */
   public data = {
@@ -54,7 +57,15 @@ export class AppComponent implements OnInit {
     }
   };
 
+  onKey(event: KeyboardEvent) {
+    this.values += (<HTMLInputElement>event.target).value;
+  }
+
   ngOnInit() {
     console.log('data', this.data);
   }
+  ngDoCheck() {
+    console.log('param: ', this.chooseParam, 'equals: ', this.chooseEqual, 'input: ', this.values);
+  }
+
 }
