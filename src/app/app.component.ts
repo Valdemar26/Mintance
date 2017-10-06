@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SelectItem } from "primeng/components/common/selectitem";
 
 @Component({
@@ -6,7 +6,7 @@ import { SelectItem } from "primeng/components/common/selectitem";
   templateUrl: './app.component.html',
   styleUrls: ['app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   cities: SelectItem[];
   selectedCity: string;
@@ -22,5 +22,39 @@ export class AppComponent {
   }
 
   checked: boolean;
+  val: boolean;
 
+  /* from json file */
+  public data = {
+    "or": {
+      "param_one": [
+        {
+          "not_equal": "test"
+        }
+      ],
+      "and": {
+        "param_two": [
+          {
+            "equal": "other param"
+          }
+        ],
+        "or": {
+          "param_tree": [
+            {
+              "equal": "some string"
+            }
+          ],
+          "param_four": [
+            {
+              "equal": "some other string"
+            }
+          ]
+        }
+      }
+    }
+  };
+
+  ngOnInit() {
+    console.log('data', this.data);
+  }
 }
